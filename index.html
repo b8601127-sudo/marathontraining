@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>12 週馬拉松訓練計畫</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF1F4;--card:#fff;--ink:#14202B;--mut:#5B6B7A;--line:#D6DDE4;--acc:#1F4FD8;--onacc:#fff;
+--easy:#238a5c;--tempo:#b98000;--interval:#d03a25;--long:#6B4FD0;--recovery:#2b8fa1;--cross:#6b7b90;--rest:#aab5c0;--race:#c2185b;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0E151C;--card:#17212B;--ink:#E8EEF3;--mut:#93A3B3;--line:#2A3846;--acc:#6C8DFF;--onacc:#0E151C;
+--easy:#4cc38a;--tempo:#f0b429;--interval:#ff7058;--long:#a08cff;--recovery:#54c3d6;--cross:#8ea0b6;--rest:#4b5966;--race:#ff5c9a}}
+:root[data-theme="dark"]{--bg:#0E151C;--card:#17212B;--ink:#E8EEF3;--mut:#93A3B3;--line:#2A3846;--acc:#6C8DFF;--onacc:#0E151C;
+--easy:#4cc38a;--tempo:#f0b429;--interval:#ff7058;--long:#a08cff;--recovery:#54c3d6;--cross:#8ea0b6;--rest:#4b5966;--race:#ff5c9a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Noto Sans TC",system-ui,sans-serif}
+.wrap{max-width:720px;margin:0 auto;padding:14px 14px 90px}
+h1{font-size:20px;margin:4px 0 12px;font-weight:700}
+.num{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:700;letter-spacing:.2px}
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:10;display:flex;justify-content:center;gap:8px;background:var(--card);border-top:1px solid var(--line);padding:8px 14px calc(8px + env(safe-area-inset-bottom,0px))}
+.tabs button{flex:1;max-width:340px;padding:9px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;font:inherit;font-weight:500;cursor:pointer}
+.tabs button.on{background:var(--acc);color:var(--onacc);border-color:var(--acc)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:12px}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.stats{display:flex;gap:16px;align-items:baseline;flex-wrap:wrap}
+.stats b{font-size:26px}.stats span{color:var(--mut);font-size:13px}
+.strip{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;margin-top:10px}
+.strip button{border:0;background:var(--line);height:34px;border-radius:5px;position:relative;overflow:hidden;cursor:pointer;color:var(--ink);font-size:11px;padding:0}
+.strip i{position:absolute;left:0;bottom:0;width:100%;background:var(--easy);opacity:.55}
+.strip span{position:relative}
+.strip button.cur{outline:2px solid var(--acc)}
+.nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.nav button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;width:36px;height:34px;font-size:16px;cursor:pointer}
+.nav strong{font-size:16px}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.dow{text-align:center;color:var(--mut);font-size:12px;padding:2px 0}
+.cell{min-height:64px;border:1px solid var(--line);background:var(--card);border-radius:7px;padding:3px 4px;text-align:left;cursor:pointer;color:var(--ink);font:inherit;position:relative;display:flex;flex-direction:column;gap:1px;min-width:0}
+.cell.out{opacity:.35}.cell.sel{outline:2px solid var(--acc)}.cell.today .d{color:var(--acc);font-weight:700}
+.cell .d{font-size:11px;color:var(--mut)}
+.cell .t{font-size:11px;font-weight:700;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cell .k{font-size:15px;line-height:1}
+.cell.done{background:color-mix(in srgb,var(--easy) 14%,var(--card))}
+.cell.done::after{content:"✓";position:absolute;right:4px;top:2px;color:var(--easy);font-weight:700;font-size:13px}
+.cell.rest .t,.cell.rest .k{color:var(--mut);font-weight:400}
+.legend{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:12px;color:var(--mut);margin-top:8px}
+.legend b{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:4px}
+.det h2{margin:0;font-size:18px}.det .sub{color:var(--mut);font-size:13px}
+.det p{margin:8px 0}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.big{flex:1;min-width:140px;padding:12px;border-radius:9px;border:2px solid var(--easy);background:transparent;color:var(--easy);font:inherit;font-weight:700;font-size:16px;cursor:pointer}
+.big.on{background:var(--easy);color:var(--card)}
+label{font-size:13px;color:var(--mut);display:block;margin-bottom:4px}
+select,input[type=date],input[type=number],input[type=text]{width:100%;padding:8px;border:1px solid var(--line);border-radius:7px;background:var(--bg);color:var(--ink);font:inherit}
+.f{margin-bottom:12px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chips button{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;cursor:pointer}
+.chips button.on{background:var(--acc);border-color:var(--acc);color:var(--onacc);font-weight:700}
+.primary{width:100%;padding:12px;border:0;border-radius:9px;background:var(--acc);color:var(--onacc);font:inherit;font-weight:700;font-size:16px;cursor:pointer}
+.how{margin:10px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 10px;font-size:14px}
+.how dt{color:var(--mut);font-weight:500;white-space:nowrap}.how dd{margin:0}
+details.card summary{cursor:pointer;font-weight:700}
+details.card dl{margin:10px 0 0;font-size:14px}
+details.card dt{font-weight:700;margin-top:10px}
+details.card dd{margin:2px 0 0;color:var(--mut)}
+.hint{font-size:12px;color:var(--mut);margin-top:6px}
+.hide{display:none}
+@media (max-width:480px){.cell{min-height:56px}.cell .t{font-size:10px}.cell .k{font-size:13px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="tabs"><button id="tCal" class="on">日曆</button><button id="tSet">設定計畫</button></div>
+
+<section id="vCal">
+  <div class="card" id="prog"></div>
+  <div class="card">
+    <div class="nav"><button id="prev" aria-label="上個月">‹</button><strong id="mTitle"></strong><button id="next" aria-label="下個月">›</button></div>
+    <div class="grid" id="grid"></div>
+    <div class="legend" id="legend"></div>
+  </div>
+  <div id="chkBar" class="row" style="margin:0 0 12px"></div>
+  <div class="card det" id="det"></div>
+  <details class="card" id="gloss"></details>
+</section>
+
+<section id="vSet" class="hide">
+  <div class="card">
+    <div class="f"><label for="race">比賽日期</label><input type="date" id="race"><div class="hint" id="startHint"></div></div>
+    <div class="f"><label for="dist">比賽項目</label><select id="dist"><option value="full">全程馬拉松(42.195K)</option><option value="half">半程馬拉松(21.0975K)</option></select></div>
+    <div class="f"><label for="level">程度(決定週里程與最長長跑)</label>
+      <select id="level"><option value="beg">入門:目標完賽(週跑量峰值約 55K)</option><option value="mid">進階:目標 4:30 內(峰值約 70K)</option><option value="adv">高階:目標 4:00 內(峰值約 90K)</option></select></div>
+    <div class="f"><label for="target">目標完賽時間(選填,用來算出各項目配速)</label><input type="text" id="target" placeholder="例如 4:30(時:分)"></div>
+    <div class="f"><label for="age">年齡(選填,用來估算心率區間)</label><input type="number" id="age" min="10" max="90"></div>
+    <div class="f"><label>每週跑步日(建議 3–6 天)</label><div class="chips" id="runChips"></div></div>
+    <div class="f"><label for="longDay">長距離跑安排在</label><select id="longDay"></select></div>
+    <div class="f"><label><input type="checkbox" id="cross"> 在一個非跑步日加入交叉訓練(騎車/游泳/肌力 45 分)</label></div>
+    <button class="primary" id="gen">產生 12 週計畫</button>
+    <div class="hint" id="genHint">計畫產生後,可在日曆點選任一天修改訓練項目與里程。</div>
+  </div>
+</section>
+</div>
+
+<script>
+const TY={easy:['輕鬆跑','--easy'],tempo:['節奏跑','--tempo'],interval:['間歇跑','--interval'],long:['長距離跑','--long'],recovery:['恢復跑','--recovery'],cross:['交叉訓練','--cross'],rest:['休息','--rest'],race:['比賽日','--race']};
+const LV={full:{beg:{peak:58,cap:30},mid:{peak:70,cap:32},adv:{peak:90,cap:35}},half:{beg:{peak:35,cap:17},mid:{peak:45,cap:20},adv:{peak:60,cap:22}}};
+const LT={full:['入門:目標完賽(週跑量峰值約 58K)','進階:目標 4:30 內(峰值約 70K)','高階:目標 4:00 內(峰值約 90K)'],half:['入門:目標完賽(週跑量峰值約 35K)','進階:目標 2:00 內(峰值約 45K)','高階:目標 1:45 內(峰值約 60K)']};
+const DN={full:['全程馬拉松',42.2],half:['半程馬拉松',21.1]};
+const MULT=[.55,.62,.7,.55,.78,.85,.92,.7,.98,1,.7,.35];
+const PH=['基礎期','基礎期','基礎期','基礎期','增強期','增強期','增強期','增強期','高峰期','高峰期','減量期','比賽週'];
+const DOW='一二三四五六日';
+const $=s=>document.querySelector(s), K='mp12v1';
+let S=null; try{S=JSON.parse(localStorage.getItem(K))}catch(e){}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const pad=n=>String(n).padStart(2,'0');
+const fmt=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const parse=s=>{const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
+const add=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
+const mondayOf=d=>add(d,-((d.getDay()+6)%7));
+const today=fmt(new Date());
+
+let cfg={target:'',age:'',dist:'full',race:'',level:'beg',run:[0,2,4,6],long:6,cross:true};
+let cur={y:0,m:0}, sel=null, armed=false;
+
+function defaultRace(){let d=add(new Date(),7*13);return fmt(add(d,(7-d.getDay())%7))}
+function startOf(race){return add(mondayOf(parse(race)),-77)}
+
+function generate(c){
+  const P=LV[c.dist][c.level], SH=c.dist==='half'?.5:.45, start=startOf(c.race), days={}, rd=parse(c.race);
+  const dist=d=>{const x=Math.abs(d-c.long);return Math.min(x,7-x)};
+  const nonLong=c.run.filter(d=>d!==c.long);
+  const rec=(c.long+1)%7;
+  const ranked=[...nonLong].sort((a,b)=>(a===rec)-(b===rec)||dist(b)-dist(a));
+  const restDays=[0,1,2,3,4,5,6].filter(d=>!c.run.includes(d));
+  const crossDay=c.cross?restDays.find(d=>d!==(c.long+6)%7):-1;
+  for(let w=0;w<12;w++)for(let i=0;i<7;i++){
+    const date=add(start,w*7+i), key=fmt(date);
+    let e={t:'rest',km:0,done:false};
+    if(w===11){
+      const off=Math.round((date-rd)/864e5);
+      if(off===0)e={t:'race',km:DN[c.dist][1],done:false};
+      else if(off<0&&off>=-2||off>0)e={t:'rest',km:0,done:false};
+      else if(c.run.includes(i))e={t:'easy',km:5,done:false};
+    }else if(c.run.includes(i)){
+      const weekly=P.peak*MULT[w], lk=Math.max(6,Math.min(P.cap,Math.round(weekly*SH)));
+      if(i===c.long)e={t:'long',km:lk,done:false};
+      else{
+        const nq=c.run.length>=5?2:1, idx=ranked.indexOf(i), isQ=idx<nq&&i!==rec||(idx<nq&&nonLong.length<=nq);
+        const wts=ranked.map((d,j)=>j<nq&&d!==rec?1.3:1), sum=wts.reduce((a,b)=>a+b,0);
+        const km=Math.max(4,Math.round((weekly-lk)*wts[idx]/sum));
+        let t='easy';
+        if(isQ)t=(idx+w)%2===0?'tempo':'interval';
+        else if(i===rec&&c.run.length>=4)t='recovery';
+        e={t,km,done:false};
+      }
+    }else if(i===crossDay)e={t:'cross',km:0,done:false};
+    days[key]=e;
+  }
+  return {cfg:c,start:fmt(start),days};
+}
+
+function desc(e,w){
+  const k=e.km;
+  switch(e.t){
+    case'easy':return '對話配速輕鬆跑,呼吸平順、心率維持在區間 2。';
+    case'recovery':return '非常輕鬆的恢復跑,配速比輕鬆跑再慢一些,幫助長跑後恢復。';
+    case'tempo':return `熱身 2K + 節奏配速 ${Math.max(2,Math.round((k-3)*.6))}K(略感吃力但可維持,約半馬配速)+ 緩和 1K。`;
+    case'interval':return `熱身 2K + 800m × ${4+Math.floor(w/2)} 趟(5K 配速),每趟間休 90 秒慢跑 + 緩和 1K。`;
+    case'long':return w>=8&&w<10?'穩定慢速起跑,後段 8–10K 提速至目標馬拉松配速,練習補給與配速。':'穩定慢速,每 5K 補水/補給,以完成距離為主。';
+    case'cross':return '騎車、游泳或肌力訓練 45 分鐘,低衝擊維持心肺與核心。';
+    case'race':return S.cfg.dist==='half'?'比賽日!前段保守起跑,後半段視狀況加速,享受 21.0975K。':'比賽日!前段保守起跑,按計畫補給,享受 42.195K。';
+    default:return '完全休息,睡眠與伸展。';
+  }
+}
+const parseT=s=>{const m=/^(\d{1,2}):(\d{2})$/.exec(s||'');return m?(+m[1]*3600+ +m[2]*60):null};
+const mmss=x=>{x=Math.round(x);return Math.floor(x/60)+':'+pad(x%60)};
+const rng=(a,b)=>mmss(a)+'–'+mmss(b)+' /K';
+function pcs(){const c=S&&S.cfg,t=c&&parseT(c.target);if(!t)return null;let mp,hmp;
+  if(c.dist==='full'){mp=t/42.195;hmp=mp*.925}else{hmp=t/21.0975;mp=hmp/.925}
+  return{mp,hmp,k5:mp*.8,eLo:mp+60,eHi:mp+90}}
+function hrz(lo,hi){const a=S&&S.cfg&&+S.cfg.age;if(!a)return'';const m=220-a;return `(約 ${Math.round(m*lo)}–${Math.round(m*hi)} bpm)`}
+function howto(e,w){const P=pcs();let R=[];
+  const easyP=P?rng(P.eLo,P.eHi)+',以心率與感覺為準,上坡可更慢':'比馬拉松配速慢約 60–90 秒/公里,以心率與感覺為準,不追配速';
+  switch(e.t){
+  case'easy':R=[['感覺','RPE 3–4 / 10,能說完整句子(對話測試)'],['心率','區間2:最大心率 60–70% '+hrz(.6,.7)],['配速',easyP],['目的','累積有氧基礎與跑量,同時保留恢復空間']];break;
+  case'recovery':R=[['感覺','RPE 2–3 / 10,輕鬆到像在散步慢跑'],['心率','區間1–2:低於最大心率 70% '+hrz(.5,.7)],['配速',P?rng(P.eLo+15,P.eHi+30):'比輕鬆跑再慢 15–30 秒/公里,可跑走交替'],['目的','長跑或高強度後促進血液循環與恢復']];break;
+  case'tempo':R=[['感覺','RPE 6–7 / 10,「舒服的吃力」,只能講短句'],['心率','區間3–4:最大心率 80–88% '+hrz(.8,.88)],['配速',P?mmss(P.hmp)+' /K(約半馬配速)':'約半馬配速;沒有數據時以感覺為準,最後一趟仍能穩住'],['目的','提高乳酸閾值,讓你更久維持較快配速']];break;
+  case'interval':R=[['感覺','RPE 8–9 / 10,喘但姿勢不亂,最後一趟不崩'],['心率','區間5:最大心率 90–95% '+hrz(.9,.95)+';心率反應慢,以配速為準'],['配速',P?mmss(P.k5)+' /K(約 5K 配速)':'約 5K 比賽配速(全程跑者常低於馬拉松配速 15–20%)'],['恢復','趟間慢跑 90 秒,心率降到約 70% 再開始下一趟'],['目的','提升最大攝氧量與跑步經濟性']];break;
+  case'long':R=[['感覺','RPE 4–5 / 10,前半段要「太慢」才對'],['心率','以區間2為主 '+hrz(.6,.7)],['配速',(P?rng(P.eLo,P.eHi):'輕鬆跑配速,或略快 10–20 秒/公里')+(w>=8&&w<10?';後段改跑馬拉松配速'+(P?' '+mmss(P.mp)+' /K':''):'')],['補給','每 40–45 分鐘補 30–60g 碳水,練習比賽日的能量膠與水'],['目的','鍛鍊肌耐力、脂肪利用與心理韌性']];break;
+  case'cross':R=[['強度','RPE 3–5 / 10,中低強度'],['內容','騎車、游泳、橢圓機或肌力(核心、臀腿)'],['目的','增加有氧量但減少跑步衝擊']];break;
+  case'race':R=[['配速',P?(S.cfg.dist==='half'?'半馬配速 '+mmss(P.hmp):'馬拉松配速 '+mmss(P.mp))+' /K':'前段比目標慢 5–10 秒/公里,後半段再視狀況加速'],['補給','賽前 3 小時吃熟悉的早餐,途中按練習時的節奏補水與能量'],['提醒','前 5K 最容易跑太快,守住節奏']];break;
+  default:R=[['內容','完全休息:充足睡眠、伸展、補充蛋白質與碳水'],['提醒','身體疲勞或疼痛時,寧可多休一天']];}
+  return `<dl class="how">${R.map(x=>`<dt>${x[0]}</dt><dd>${x[1]}</dd>`).join('')}</dl>`}
+function gloss(){const P=pcs();
+  const pv=(v,f)=>P?`你的數值:${f(v)}。`:'在「設定計畫」輸入目標完賽時間即可算出。';
+  const G=[
+  ['區間2(Zone 2)','以最大心率 60–70% 跑的輕鬆有氧強度。感覺是「可以聊天」,呼吸平順。'+(S&&+S.cfg.age?`依年齡估算,你的區間2約 ${hrz(.6,.7).slice(1,-1)}。`:'輸入年齡可估算你的心率範圍。')],
+  ['心率區間','以最大心率的百分比分五區:區1 50–60% 熱身恢復;區2 60–70% 輕鬆有氧;區3 70–80% 有氧偏強;區4 80–90% 閾值(節奏跑);區5 90–100% 高強度(間歇)。最大心率常用「220 − 年齡」估算,個體誤差可達 ±10 次/分,實際測量更準。'],
+  ['RPE 主觀強度','用 1–10 分自評用力程度:1–2 很輕鬆,3–4 輕鬆,5–6 中等,7 吃力,8–9 很吃力,10 全力。天氣、睡眠影響心率時,RPE 更可靠。'],
+  ['對話測試','能說完整句子 = 輕鬆有氧;只能講短句 = 節奏強度;只能說單字 = 間歇強度。'],
+  ['半馬配速','你能一口氣跑完半程馬拉松(21.1K)的配速,大約是你能撐 1–2 小時的強度,通常比馬拉松配速快約 7–8%。'+pv(P&&P.hmp,v=>mmss(v)+' /K')],
+  ['馬拉松配速','目標完賽時間 ÷ 42.195K。比賽日要穩住的配速,長跑後段練習用。'+pv(P&&P.mp,v=>mmss(v)+' /K')],
+  ['5K 配速','你全力跑 5K 比賽的配速,間歇跑的參考。'+pv(P&&P.k5,v=>mmss(v)+' /K(以目標推估,若有近期 5K 成績請以實際為準)')],
+  ['節奏配速(閾值)','大約是你全力能維持約 1 小時的配速,接近半馬配速。'],
+  ['熱身與緩和','熱身:慢跑 1–2K 加動態拉伸,讓心率逐步上升。緩和:結束後慢跑或走路 5–10 分鐘。'],
+  ['配速的限制','以上配速由目標成績推估,僅供參考;高溫、坡度、疲勞時請以心率和感覺優先。']];
+  return `<summary>名詞解釋:區間2、半馬配速等</summary><dl>${G.map(g=>`<dt>${g[0]}</dt><dd>${g[1]}</dd>`).join('')}</dl>`}
+const amt=e=>e.t==='cross'?'45分':e.t==='rest'?'':(e.km%1?e.km.toFixed(1):e.km)+'K';
+const weekIdx=k=>Math.floor(Math.round((parse(k)-parse(S.start))/864e5)/7);
+
+function setTab(n){$('#vCal').classList.toggle('hide',n!==0);$('#vSet').classList.toggle('hide',n!==1);$('#tCal').classList.toggle('on',n===0);$('#tSet').classList.toggle('on',n===1);}
+
+function renderSettings(){
+  $('#level').innerHTML=LT[cfg.dist].map((t,i)=>`<option value="${['beg','mid','adv'][i]}">${t}</option>`).join('');
+  $('#dist').value=cfg.dist;
+  $('#target').value=cfg.target||'';$('#age').value=cfg.age||'';$('#race').value=cfg.race;$('#level').value=cfg.level;$('#longDay').value=cfg.long;$('#cross').checked=cfg.cross;
+  $('#runChips').innerHTML=[...DOW].map((n,i)=>`<button data-d="${i}" class="${cfg.run.includes(i)?'on':''}" aria-pressed="${cfg.run.includes(i)}">${n}</button>`).join('');
+  $('#longDay').innerHTML=cfg.run.slice().sort().map(i=>`<option value="${i}" ${i===cfg.long?'selected':''}>週${DOW[i]}</option>`).join('');
+  $('#startHint').textContent=cfg.race?`訓練從 ${fmt(startOf(cfg.race))}(週一)開始,共 12 週。`:'';
+}
+
+function renderProg(){
+  if(!S){$('#prog').innerHTML='<b>尚未建立計畫</b><div class="hint">到「設定計畫」選擇比賽日期、每週跑步日與程度。</div>';return}
+  let dk=0,pk=0,dn=0,tn=0;const wk=Array.from({length:12},()=>[0,0]);
+  for(const [k,e] of Object.entries(S.days)){const w=weekIdx(k);const km=e.t==='cross'?0:e.km;
+    if(e.t!=='rest'){tn++;pk+=km;wk[w][1]+=km;if(e.done){dn++;dk+=km;wk[w][0]+=km}}}
+  const cw=Math.min(11,Math.max(0,weekIdx(sel||today)));
+  $('#prog').innerHTML=`<div class="stats"><div><b class="num">${dk.toFixed(0)}</b><span> / ${pk.toFixed(0)} 公里</span></div><div><b class="num">${dn}</b><span> / ${tn} 次訓練完成</span></div><span>第 ${cw+1} 週・${PH[cw]}・本週 ${wk[cw][0].toFixed(0)}/${wk[cw][1].toFixed(0)}K</span></div>
+  <div class="strip">${wk.map((v,i)=>`<button data-w="${i}" class="${i===cw?'cur':''}" aria-label="第${i+1}週"><i style="height:${v[1]?Math.round(v[0]/v[1]*100):0}%"></i><span>${i+1}</span></button>`).join('')}</div>`;
+}
+
+function renderCal(){
+  const first=new Date(cur.y,cur.m,1), last=new Date(cur.y,cur.m+1,0);
+  $('#mTitle').textContent=`${cur.y} 年 ${cur.m+1} 月`;
+  let h=[...DOW].map(n=>`<div class="dow">${n}</div>`).join('');
+  for(let d=mondayOf(first);d<=add(mondayOf(last),6);d=add(d,1)){
+    const k=fmt(d), e=S&&S.days[k], out=d.getMonth()!==cur.m;
+    h+=`<button class="cell ${out?'out':''} ${k===sel?'sel':''} ${k===today?'today':''} ${e&&e.done?'done':''} ${e&&e.t==='rest'?'rest':''}" data-k="${k}"><span class="d">${d.getDate()}</span>${e?`<span class="t" style="color:var(${TY[e.t][1]})">${TY[e.t][0]}</span><span class="k num">${amt(e)}</span>`:''}</button>`;
+  }
+  $('#grid').innerHTML=h;
+  $('#legend').innerHTML=Object.entries(TY).map(([k,v])=>`<span><b style="background:var(${v[1]})"></b>${v[0]}</span>`).join('');
+}
+
+function renderDet(){
+  const el=$('#det');
+  const e=S&&S.days[sel];
+  $('#chkBar').innerHTML=e&&e.t!=='rest'?`<button class="big ${e.done?'on':''}" id="chk">${e.done?'✓ 已完成':'標記完成'}</button>`:'';
+  if(!e){el.innerHTML=`<div class="sub">${sel||''}</div><p>這天不在訓練計畫內。${S?'':'請先到「設定計畫」建立計畫。'}</p>`;return}
+  const w=weekIdx(sel), d=parse(sel);
+  el.innerHTML=`<div class="sub">${d.getMonth()+1}/${d.getDate()} 週${DOW[(d.getDay()+6)%7]}・第 ${w+1} 週・${PH[w]}</div>
+  <h2 style="color:var(${TY[e.t][1]})">${TY[e.t][0]} <span class="num">${amt(e)}</span></h2>
+  <p>${desc(e,w)}</p>${howto(e,w)}
+  <div class="row"><div style="flex:1;min-width:130px"><label for="eT">調整項目</label><select id="eT">${Object.entries(TY).map(([k,v])=>`<option value="${k}" ${k===e.t?'selected':''}>${v[0]}</option>`).join('')}</select></div>
+  <div style="width:110px"><label for="eK">里程(K)</label><input type="number" id="eK" min="0" max="60" step="0.5" value="${e.km}"></div></div>`;
+}
+
+function renderAll(){$('#gloss').innerHTML=gloss();renderProg();renderCal();renderDet()}
+function pick(k){sel=k;const d=parse(k);cur={y:d.getFullYear(),m:d.getMonth()};renderAll()}
+
+// events
+$('#tCal').onclick=()=>setTab(0);$('#tSet').onclick=()=>{renderSettings();setTab(1)};
+$('#prev').onclick=()=>{cur.m--;if(cur.m<0){cur.m=11;cur.y--}renderCal()};
+$('#next').onclick=()=>{cur.m++;if(cur.m>11){cur.m=0;cur.y++}renderCal()};
+$('#grid').onclick=e=>{const b=e.target.closest('.cell');if(b){sel=b.dataset.k;renderAll()}};
+$('#prog').onclick=e=>{const b=e.target.closest('[data-w]');if(b&&S)pick(fmt(add(parse(S.start),b.dataset.w*7)))};
+$('#chkBar').onclick=e=>{if(e.target.id==='chk'){S.days[sel].done=!S.days[sel].done;save();renderAll()}};
+$('#det').onchange=e=>{const x=S.days[sel];
+  if(e.target.id==='eT'){x.t=e.target.value;if(x.t==='rest'||x.t==='cross'){x.km=0}else if(!x.km){x.km=x.t==='race'?DN[S.cfg.dist][1]:5}}
+  if(e.target.id==='eK'){x.km=Math.max(0,parseFloat(e.target.value)||0)}
+  save();renderAll()};
+$('#race').onchange=e=>{cfg.race=e.target.value;renderSettings()};
+$('#dist').onchange=e=>{cfg.dist=e.target.value;renderSettings()};
+$('#target').onchange=e=>{const v=e.target.value.trim();if(v&&!parseT(v)){$('#genHint').textContent='目標時間請用「時:分」格式,例如 4:30。';return}
+  cfg.target=v;$('#genHint').textContent=v?'已更新配速,不需重新產生計畫。':'已清除目標時間。';if(S){save();renderAll()}};
+$('#age').onchange=e=>{cfg.age=e.target.value;if(S){save();renderAll()}};
+$('#level').onchange=e=>cfg.level=e.target.value;
+$('#cross').onchange=e=>cfg.cross=e.target.checked;
+$('#longDay').onchange=e=>cfg.long=+e.target.value;
+$('#runChips').onclick=e=>{const b=e.target.closest('button');if(!b)return;const d=+b.dataset.d;
+  if(cfg.run.includes(d)){if(cfg.run.length<=2)return;cfg.run=cfg.run.filter(x=>x!==d)}else cfg.run=[...cfg.run,d].sort();
+  if(!cfg.run.includes(cfg.long))cfg.long=cfg.run[cfg.run.length-1];
+  renderSettings()};
+$('#gen').onclick=()=>{
+  if(!cfg.race){$('#genHint').textContent='請先選擇比賽日期。';return}
+  if(cfg.run.length<3||cfg.run.length>6){$('#genHint').textContent='跑步日請選 3 到 6 天。';return}
+  const hasProg=S&&Object.values(S.days).some(x=>x.done);
+  if(hasProg&&!armed){armed=true;$('#gen').textContent='已有完成紀錄,再按一次確認覆蓋';return}
+  armed=false;$('#gen').textContent='產生 12 週計畫';
+  S=generate(cfg);save();sel=S.start;
+  const t=S.days[today]?today:S.start;setTab(0);pick(t);
+};
+
+// init
+if(S){cfg=Object.assign({dist:'full'},S.cfg);S.cfg=cfg}else{cfg.race=defaultRace()}
+const t0=S&&S.days[today]?today:(S?S.start:today);
+sel=t0;const d0=parse(t0);cur={y:d0.getFullYear(),m:d0.getMonth()};
+if(!S){$('#gen').textContent='產生 12 週計畫';renderSettings();setTab(1)}
+renderAll();
+</script>
+</body>
+</html>
